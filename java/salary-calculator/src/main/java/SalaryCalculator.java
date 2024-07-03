@@ -1,17 +1,21 @@
 public class SalaryCalculator {
     public double salaryMultiplier(int daysSkipped) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.salaryMultiplier() method");
+        boolean applyPenalty = daysSkipped > 4;
+        return applyPenalty ? 0.85 : 1;
     }
 
     public int bonusMultiplier(int productsSold) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.bonusMultiplier() method");
+        boolean applyBonus = productsSold > 19;
+        return applyBonus ? 13 : 10;
     }
 
     public double bonusForProductsSold(int productsSold) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.bonusForProductsSold() method");
+        return bonusMultiplier(productsSold) * productsSold;
     }
 
     public double finalSalary(int daysSkipped, int productsSold) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.finalSalary() method");
-    } 
+        double salary = (1000 + bonusForProductsSold(productsSold)) * salaryMultiplier(daysSkipped);
+        boolean isSalaryCapped = salary > 2000;
+        return isSalaryCapped ? 2000 : salary;
+    }
 }
